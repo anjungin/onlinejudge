@@ -11,18 +11,28 @@ public class BB9093_단어뒤집기 {
         // 끝
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int qty = Integer.parseInt(br.readLine());
-        String[] sentences = new String[qty];
-
+        String[] sentence = new String[qty];
+        for (int x = 0; x < qty; x++) {
+            sentence[x] = br.readLine();
+        }
         for (int i = 0; i < qty; i++) {
-            String[] words = br.readLine().split(" ");
-            String[] sentence = new String[words.length];
-            for (String word : words) {
-                for (int k = 0; k < word.length()/2; k++) {
-                    String temp = word.charAt(k) + "";
-//                    word =
+            String[] words = sentence[i].split(" ");
+            for (int j = 0; j < words.length; j++) {
+                String word = words[j];
+                if (word.length() == 1) {
+                    System.out.print(word + " ");
+                } else {
+                    StringBuilder strb = new StringBuilder(word);
+                    for (int k = 0; k < word.length() / 2; k++) {
+                        char temp = strb.charAt(word.length() - 1 - k);
+                        strb.setCharAt(word.length() - 1 - k, strb.charAt(k));
+                        strb.setCharAt(k, temp);
+                    }
+                    System.out.print(strb);
+                    if (j != words.length - 1) System.out.print(" ");
                 }
-
             }
+            System.out.println();
         }
     }
 }
